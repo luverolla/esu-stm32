@@ -1,0 +1,14 @@
+.settings/
+
+Debug/
+Drivers/
+Core/Startup/
+
+Core/Src/syscall.c
+Core/Src/sysmem.c
+Core/Src/stm32f4xx_hal_map.c
+Core/Src/stm32f4xx_it.c
+
+*.launch
+*.ioc
+*.ld
