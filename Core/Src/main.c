@@ -69,7 +69,7 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-prompt_t* prompt;
+ESH_Shell* prompt;
 /* USER CODE END 0 */
 
 /**
@@ -79,12 +79,10 @@ prompt_t* prompt;
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-  prompt = prompt_create(&huart2);
-  prompt_add_cmd(prompt, "a", (void*)turn_on_led);
-  prompt_add_cmd(prompt, "s", (void*)turn_off_led);
-  prompt_add_cmd(prompt, "t", (void*)toggle_led);
-  prompt_add_cmd(prompt, "b", (void*)blink_led);
-  prompt_add_cmd(prompt, "p", (void*)pwm_led);
+  prompt = ESH_Init(&huart2, "cazzo\0");
+  ESH_AddCommand(prompt, "a", (void*)turn_on_led);
+  ESH_AddCommand(prompt, "s", (void*)turn_off_led);
+  ESH_AddCommand(prompt, "t", (void*)toggle_led);
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -109,7 +107,7 @@ int main(void)
   MX_TIM10_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
-  prompt_start(prompt);
+  ESH_Start(prompt);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -169,7 +167,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
 	if (huart -> Instance == USART2)
 	{
-		prompt_read(prompt);
+		ESH_Read(prompt);
 	}
 }
 
@@ -177,7 +175,7 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
 {
     if (huart -> Instance == USART2)
     {
-    	prompt_wait_next(prompt);
+    	ESH_WaitNext(prompt);
     }
 }
 

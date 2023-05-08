@@ -4,7 +4,7 @@
 #include "usart.h"
 #include "tim.h"
 
-void turn_on_led(prompt_t* prompt, int argc, char** argv)
+void turn_on_led(int argc, char** argv)
 {
 	HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_1);
 	HAL_TIM_Base_Stop_IT(&htim10);
@@ -18,10 +18,10 @@ void turn_on_led(prompt_t* prompt, int argc, char** argv)
 	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
-	PROMPT_SEND_MSG(prompt, "\r\nOk. Led is on\r\n");
+	//PROMPT_SEND_MSG(prompt, "\r\nOk. Led is on\r\n");
 }
 
-void turn_off_led(prompt_t* prompt, int argc, char** argv)
+void turn_off_led(int argc, char** argv)
 {
 	HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_1);
 	HAL_TIM_Base_Stop_IT(&htim10);
@@ -35,10 +35,10 @@ void turn_off_led(prompt_t* prompt, int argc, char** argv)
 	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
-	PROMPT_SEND_MSG(prompt, "\r\nOk. Led is off\r\n");
+	//PROMPT_SEND_MSG(prompt, "\r\nOk. Led is off\r\n");
 }
 
-void toggle_led(prompt_t* prompt, int argc, char** argv)
+void toggle_led(int argc, char** argv)
 {
 	HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_1);
 	HAL_TIM_Base_Stop_IT(&htim10);
@@ -52,10 +52,10 @@ void toggle_led(prompt_t* prompt, int argc, char** argv)
 	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
 	HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
-	PROMPT_SEND_MSG(prompt, "\r\nOk. Led state changed\r\n");
+	//PROMPT_SEND_MSG(prompt, "\r\nOk. Led state changed\r\n");
 }
 
-void blink_led(prompt_t* prompt, int argc, char** argv)
+void blink_led(int argc, char** argv)
 {
 	HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_1);
 	HAL_TIM_Base_Start_IT(&htim10);
@@ -68,10 +68,10 @@ void blink_led(prompt_t* prompt, int argc, char** argv)
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
 	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-	PROMPT_SEND_MSG(prompt, "\r\nOk. Led started blinking\r\n");
+	//PROMPT_SEND_MSG(prompt, "\r\nOk. Led started blinking\r\n");
 }
 
-void pwm_led(prompt_t* prompt, int argc, char** argv)
+void pwm_led(int argc, char** argv)
 {
 	HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_1);
 
@@ -97,5 +97,5 @@ void pwm_led(prompt_t* prompt, int argc, char** argv)
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
     HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
-    PROMPT_SEND_MSG(prompt, "\r\nOk. Led on with intensity level %d\r\n", input);
+    //PROMPT_SEND_MSG(prompt, "\r\nOk. Led on with intensity level %d\r\n", input);
 }
